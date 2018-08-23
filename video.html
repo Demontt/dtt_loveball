@@ -1,0 +1,130 @@
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="DTT(1790481861@qq.com)">
+    <style>
+        * {
+            margin:0 auto;
+            padding:0;
+        }
+        .play {
+            color: #01e5ff;
+            font-size: 36px;
+        }
+
+        .overPlay {
+            font-size: inherit;
+            color: #fff;
+        }
+
+        #div_lrc {
+            position: absolute;
+            padding-top: 0px;
+            left: 20%;
+            top: 300px;
+            font-size: 24px;
+            transition: top .5s;
+            margin: 0 auto; 
+        }
+        .div_DisLrc {
+            overflow: hidden;
+            color:#b1abab;
+            width: 100%;
+            height:100%;  
+            position: relative;
+            margin: 0 auto;
+        }
+        .div_audio {
+            width: 100%;
+            margin: 0 auto;
+        }
+        .div_but {
+            position: absolute;
+            font-size: 26px;
+            font-weight: 900;
+            top: 40%;
+            right: 20%;
+        }
+        .div_but p {
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+    </style>
+    <link href="css/iconfont.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="div_1" style="display: none;"></div>
+
+    <div class="div_DisLrc">
+        <div id="div_lrc"><p id="lrc_row1"></p></div>
+
+        <div class="div_but">
+            <p onmousedown="time = setInterval(btn_down,0)" onmouseup="clearInterval(time)"><i class="iconfont icon-top"></i></p>
+            <p onmousedown="time = setInterval(btn_top,0)" onmouseup="clearInterval(time)"><i class="iconfont icon-down"></i></p>
+        </div>
+    </div>
+
+    <div class="div_audio">
+        <audio id="audio" controls="controls" autoplay="autoplay" hidden="true">
+            <source src="resources/DAOKO.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+    <script>
+        let audio = document.getElementById("audio");
+        let play = $("#lrc_row1");
+
+        $(document).ready(function () {
+            $('#div_1').load("resources/222.lrc");
+            audio.play();
+            setTimeout(function () {
+                var lrcArr = $("#div_1").text().split('\n');
+                for (var i = 4; i < lrcArr.length; i++) {
+                    var p = document.createElement("p");
+                    if (lrcArr[i].substring(10) != "") {
+                        p.innerText = lrcArr[i].substring(10);
+                        $("#div_lrc").append(p);
+                    }
+                }
+            }, 200)
+        })
+
+        function lrcDisplay() {
+            let minute = parseInt(audio.currentTime / 60);
+            minute = minute == 0 ? "00" : (minute + "").length < 2 ? "0" + minute : minute;
+
+            let second = (parseInt(audio.currentTime)) % 60;
+            second = second == 0 ? "00" : (second + "").length < 2 ? "0" + second : second;
+
+            let regex = new RegExp('\\[' + (minute + ":" + second) + '.+\\].+\n');
+            let text = regex.exec($("#div_1").text());
+
+            if (text != null) {
+                let str1 = new String($(play).next().text());
+                let str2 = new String(text[0].substring(10));
+                if (str1.trim() == str2.trim()) {
+                    $(play).attr("class", "overPlay");
+                    play = $(play).next();
+                    $(play).attr("class", "play");
+
+                    let top = parseInt($("#div_lrc").css("top"));
+                    $("#div_lrc").css("top", -1* ((-1 * top) + 30) + "px");
+                }
+            }
+        }
+        setInterval(lrcDisplay, 500);
+
+        let time = null;
+        const btn_down = ()=>{
+            let top = parseInt($("#div_lrc").css("top"));
+            if (top <= 0)
+                $("#div_lrc").css("top", -1 * ((-1 * top) - 100) + "px");
+        }
+        const btn_top = ()=>{
+            var top = parseInt($("#div_lrc").css("top"));
+            $("#div_lrc").css("top", -1 * ((-1 * top) + 30) + "px");
+        }
+    </script>
+</body>
+</html>
