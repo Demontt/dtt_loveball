@@ -3,9 +3,14 @@
 ## ScreenShot image
 ![image](/img/example.png)
 
+## Address
+[Demo](https://demontt.github.io/dtt_loveball/)
+
+> The page can be refreshed multiple times because the static file is too large.
+
 ## OOP ( Object Oriented Programming )
-Everything is Object.
-Each balloon is a `div` object.
+* Everything is Object.
+* Each balloon is a `div` object.
 
 ```
 Balloon.prototype.drawBalloon = function(parent){
@@ -15,7 +20,7 @@ Balloon.prototype.drawBalloon = function(parent){
 ```
 
 ## Random motion trajectory
-use rangdom function.
+* use rangdom function.
 ```
 const randomRange = (min,max) => Math.random()*(max-min)+min;
 ```
@@ -69,7 +74,7 @@ minute = minute == 0 ? "00" : (minute + "").length < 2 ? "0" + minute : minute;
 
 * Use ternary expressions to distinguish
 ```
-window.location.href = /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent) ? "http://www.pluscpp.com/loveball/little/main.html" :  "http://www.pluscpp.com/loveball/main.html";
+window.location.href = /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent) ? "https://demontt.github.io/dtt_loveball/little/main.html" :  "https://demontt.github.io/dtt_loveball/main.html";
 ```
 
 ## Pull Request
