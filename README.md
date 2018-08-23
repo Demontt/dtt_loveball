@@ -4,7 +4,7 @@
 ![image](/img/example.png)
 
 ## Address
-[Demo]("https://demontt.github.io/dtt_loveball/")
+[Demo](https://demontt.github.io/dtt_loveball/)
 
 > The page can be refreshed multiple times because the static file is too large.
 
