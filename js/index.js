@@ -17,26 +17,7 @@ Balloon.prototype.drawBalloon = function(parent){
 }
 
 
-function Balloon(pic){
-	this.div=document.createElement("div");
-	this.left = randomRange(0,1000);
-	this.top  = randomRange(0,600);
-
-	if(pic == null){
-		this.bg = randomColor();//0-255
-		this.r  = Math.random() * 60 + 40;
-
-		this.speedX = randomRange(-5,5);
-		this.speedY = randomRange(-5,5);
-	}else{
-		this.bg = pic;
-		this.r  = 80; 
-
-		this.speedX = randomRange(-3,3);
-		this.speedY = randomRange(-3,3);
-	}
-	
-}
+function Balloon(pic){this.div=document.createElement("div");this.left=randomRange(0,1000);this.top=randomRange(0,600);if(pic==null){this.bg=randomColor();this.r=Math.random()*60+40;this.speedX=randomRange(-5,5);this.speedY=randomRange(-5,5)}else{this.bg=pic;this.r=80;this.speedX=randomRange(-3,3);this.speedY=randomRange(-3,3)}};
 
 Balloon.prototype.run = function(){
 
@@ -57,5 +38,3 @@ Balloon.prototype.run = function(){
 		ts.div.style.top  = top + "px";
 	},20);
 }
- 
-
